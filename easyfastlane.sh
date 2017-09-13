@@ -340,8 +340,6 @@ function fun_create_dev_push()
 		    mkdir $APP_PUSH_CERT_DIR
 		fi
 
-		rm -rf $APP_PUSH_CERT_DIR/*
-
 		PUSH_NAME_TMEP=${APP_IDENTIFIER#*.}
 		PUSH_NAME_TMEP1=${PUSH_NAME_TMEP%.*}
 		PUSH_NAME_TMEP2=${PUSH_NAME_TMEP##*.}
@@ -386,8 +384,6 @@ function fun_create_prod_push()
 		if ! [[ -d $APP_PUSH_CERT_DIR ]]; then
 		    mkdir $APP_PUSH_CERT_DIR
 		fi
-
-		rm -rf $APP_PUSH_CERT_DIR/*
 
 		PUSH_NAME_TMEP=${APP_IDENTIFIER#*.}
 		PUSH_NAME_TMEP1=${PUSH_NAME_TMEP%.*}
