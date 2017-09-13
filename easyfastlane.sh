@@ -410,6 +410,11 @@ function fun_create_prod_push()
 	esac	
 }
 
+function fun_create_profile()
+{
+	echo "coming soon !"
+}
+
 function run()
 {
 
@@ -447,23 +452,6 @@ function run()
 			;;
 		"create_profile")
 			fun_create_profile
-			;;
-		"deliver_ituens")
-			clear
-			echo "==================================================="
-			echo -e "\033[7m Deliver Metadata to iTunes Connect \033[m"
-			echo
-			fun_deliver
-			;;
-		"build_project")
-			clear
-			echo "==================================================="
-			echo -e "\033[7m Build Project \033[m"
-			echo
-			fun_build
-			;;
-		"svnup")
-			$IOS_PROJECT_ROOT/svnup.sh
 			;;
 		"quit")
 			echo "Quit !!"
