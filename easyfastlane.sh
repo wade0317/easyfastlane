@@ -72,13 +72,6 @@ function read_account_id()
 		echo "export APPLE_ACOUNT_ID=$APPLE_ACOUNT_ID" >> ~/.profile
 		export APPLE_ACOUNT_ID=$APPLE_ACOUNT_ID
 	done
-
-	APP_RESOURCE_DIR="$CURRENT_DIR"/$APPLE_ACOUNT_ID
-
-	if ! [[ -d "$APP_RESOURCE_DIR" ]]; then
-	    mkdir "$APP_RESOURCE_DIR"
-	fi
-	
 }
 
 function read_bundle_id()
@@ -91,11 +84,6 @@ function read_bundle_id()
 		echo "export APP_IDENTIFIER=$APP_IDENTIFIER" >> ~/.profile
 		export APP_IDENTIFIER=$APP_IDENTIFIER
 	done
-
-	TARGET_APP_RESOURCE_DIR="$APP_RESOURCE_DIR"/$APP_IDENTIFIER
-	if ! [[ -d "$TARGET_APP_RESOURCE_DIR" ]]; then
-	    mkdir "$TARGET_APP_RESOURCE_DIR"
-	fi
 	
 }
 
@@ -107,7 +95,7 @@ function fun_read_app_config()
 
 		if [[ "$APPLE_ACOUNT_ID" != "" ]]; then
 			echo "Apple ID:  $APPLE_ACOUNT_ID"
-			echo  -e "Apple ID is right? \c" ; APPLE_ID_IS_RIGHT=Y; read APPLE_ID_IS_RIGHT
+			echo  -e "Apple ID is right,Y/n?\c" ; APPLE_ID_IS_RIGHT=Y; read APPLE_ID_IS_RIGHT
 			case $APPLE_ID_IS_RIGHT in 
 			[Yy])
 				break
@@ -125,12 +113,19 @@ function fun_read_app_config()
 
 	done
 
+	APP_RESOURCE_DIR="$CURRENT_DIR"/$APPLE_ACOUNT_ID
+
+	if ! [[ -d "$APP_RESOURCE_DIR" ]]; then
+	    mkdir "$APP_RESOURCE_DIR"
+	fi
+
+
 	while  [[ "$BUNDLE_ID_IS_RIGHT" == "" ]]
 	do
 
 		if [[ "$APP_IDENTIFIER" != "" ]]; then
 			echo "Bundle ID:  $APP_IDENTIFIER"
-			echo  -e "Bundle ID is right? \c" ; BUNDLE_ID_IS_RIGHT=Y; read BUNDLE_ID_IS_RIGHT
+			echo  -e "Bundle ID is right,Y/n?\c" ; BUNDLE_ID_IS_RIGHT=Y; read BUNDLE_ID_IS_RIGHT
 			case $BUNDLE_ID_IS_RIGHT in 
 			[Yy])
 				break
@@ -146,6 +141,11 @@ function fun_read_app_config()
 			BUNDLE_ID_IS_RIGHT=Y
 		fi
 	done
+
+	TARGET_APP_RESOURCE_DIR="$APP_RESOURCE_DIR"/$APP_IDENTIFIER
+	if ! [[ -d "$TARGET_APP_RESOURCE_DIR" ]]; then
+	    mkdir "$TARGET_APP_RESOURCE_DIR"
+	fi
 }
 function fun_create_bundleid()
 {
